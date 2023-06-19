@@ -4,18 +4,24 @@ end
 
 class Array
   def hash
+    res = 0
+    self.each_with_index { |ele, i| res += ele.hash * i }
+    res
   end
 end
 
 class String
   def hash
+    res = 0
+    self.each_char.with_index { |ele, i| res += ele.ord.hash * i }
+    res
   end
 end
 
 class Hash
-  # This returns 0 because rspec will break if it returns nil
-  # Make sure to implement an actual Hash#hash method
   def hash
-    0
+    res = 0
+    self.each { |k, v| res += k.to_s.ord.hash + v.to_s.ord.hash }
+    res
   end
 end
